@@ -34,8 +34,6 @@ await cloudantExport.db.list().then((body) => {
   });
 }).catch((err) => { console.log(err); });
 
-// cloudantExportDBNames.forEach(db => console.log(db))
-
 // Create all DB's in Import Cloudant instance
 const createDBs = async () => {
 
@@ -58,23 +56,18 @@ for (let i=1; i < cloudantExportDBNames.length; i++) {
   }));
   console.log(`--> Moving ${tempDBFiles.length} files`)
   
-  // Loop through all files and get corresponding full document
+  // Loop through all files and get corresponding full document, remove revision field and cache
   const getFullDocument = async () => {
     for (let i=0; i < tempDBFiles.length; i++) {
       await sleep(API_SLEEP_MS);
       let doc = await dbNameExport.get(tempDBFiles[i].id);
+      delete doc._rev;
       tempDBDocs.push(doc);
     }
   }
   await getFullDocument();
   
-  // Loop through all full documents and remove the _rev field
-  for (let i=0; i < tempDBDocs.length; i++) {
-    let doc = tempDBDocs[i]
-    delete doc._rev;
-  }
-  
-  // buld upload all docs to import Cloudant instance
+  // bulk upload all docs to import Cloudant instance
   await dbNameImport.bulk({docs: tempDBDocs});
   
   // cleanup arrays
