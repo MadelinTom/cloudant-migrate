@@ -8,16 +8,16 @@ It appears nodejs-cloudant is old and there is a new version here: [cloudant-nod
 ## Warning
 This code is untested... Use at your own risk!
 
-It does not delete or override anything in your export database - however if something goes wrong you might be left with a half full import database. This didn't happen to me though, so good luck.
+It does not delete or override anything in your export database - however if something goes wrong you might be left with a half full import database.
 
 ## Cloudant usage
-1. Create a .env file and fill in Cloudant credentials for both export and import instances
+1. Create a .env file and fill in Cloudant credentials for both export and import instances (see `.env_template`)
 2. run `source .env`
 3. run `npm run cloudant`
 
 Depending on your plan you might hit rate limits - if this is the case increase the API_SLEEP_MS on line 6 of `cloudant/cloudant.js`
 
 ## Cos usage
-1. Create a .env file and fill in COS credentials for both export and import instances
+1. Create a .env file and fill in COS credentials for both export and import instances (see `.env_template`)
 2. run `source .env`
 3. run `npm run cos`
