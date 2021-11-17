@@ -5,10 +5,12 @@
   "main": "cloudant.js",
   "type": "module",
   "dependencies": {
-    "@cloudant/cloudant": "4.5.1"
+    "@cloudant/cloudant": "4.5.1",
+    "ibm-cos-sdk": "1.11.0"
   },
   "scripts": {
-    "start": "node cloudant.js"
+    "cloudant": "node cloudant/cloudant.js",
+    "cos": "node cos/cos.js"
   },
   "repository": {
     "type": "git",
