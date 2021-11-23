@@ -34,7 +34,7 @@ const createBuckets = async () => {
   for (let i = 0; i < cosExportBucketNames.length; i++) {
     await importCos
       .createBucket({
-        Bucket: `${cosExportBucketNames[i].Name}-copy`, // This is needed because bucket names need to be globally unique
+        Bucket: `${cosExportBucketNames[i].Name}-2`, // This is needed because bucket names need to be globally unique
         CreateBucketConfiguration: {
             LocationConstraint: "eu-de-standard"
           },
@@ -78,7 +78,7 @@ for (let i = 0; i < cosImportBucketNames.length; i++) {
 
     await importCos
       .putObject({
-        Bucket: `${currentBucketName}-copy`,
+        Bucket: `${currentBucketName}-2`,
         Key: `${cosExportBucketObjects[j].Key}`,
         Body: exportObject.Body,
       })
