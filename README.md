@@ -21,6 +21,8 @@ Depending on your plan you might hit rate limits - if this is the case increase 
 ## COS
 This repo uses the [ibm-cos-sdk](https://www.npmjs.com/package/ibm-cos-sdk).
 ### Cos usage
+Depending on the type of objects you are uploading, you need to alter the `contentType` variable on line 7 of `cos/cos.js`. This repo was used to transferring svg files.
+
 1. Create a .env file and fill in COS credentials for both export and import instances (see `.env_template`)
 2. run `source .env`
 3. run `npm run cos`

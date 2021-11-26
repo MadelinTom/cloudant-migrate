@@ -4,6 +4,7 @@ import ibm from "ibm-cos-sdk";
 let cosExportBucketNames = []; // holds bucket names of export instance
 let cosImportBucketNames = []; // holds bucket names of import instance (different as bucket names need to be globally unique)
 let cosExportBucketObjects = []; // holds objects from a bucket
+const contentType = "image/svg+xml"; // change this depending on the type of objects in your S3 bucket
 
 // Account details for both import and export COS instances
 const exportConfig = {
@@ -44,7 +45,7 @@ const createBuckets = async () => {
   }
 };
 console.log(`--> Creating ${cosExportBucketNames.length} buckets`);
-await createBuckets();
+// await createBuckets();
 
 await importCos
   .listBuckets()
@@ -80,6 +81,7 @@ for (let i = 0; i < cosImportBucketNames.length; i++) {
       .putObject({
         Bucket: `${currentBucketName}-2`,
         Key: `${cosExportBucketObjects[j].Key}`,
+        ContentType: `${contentType}`, 
         Body: exportObject.Body,
       })
       .promise();
